@@ -33,6 +33,12 @@ CFLAGS += -Ied25519-donna -Icurve25519-donna -I.
 CFLAGS += -DUSE_ETHEREUM=1
 CFLAGS += -DUSE_GRAPHENE=1
 
+# Disable implic fallthrough warning & error (because -Werror) due to its use in base58.c, aescrypt.c and ed25519-donna/modm-donna-32bit.h
+CFLAGS += -Wno-implicit-fallthrough
+
+# Disable mismatched bound warning & error (because -Werror) due to its presence in sha2.c
+CFLAGS += -Wno-error=array-parameter
+
 # disable certain optimizations and features when small footprint is required
 ifdef SMALL
 CFLAGS += -DUSE_PRECOMPUTED_IV=0 -DUSE_PRECOMPUTED_CP=0
